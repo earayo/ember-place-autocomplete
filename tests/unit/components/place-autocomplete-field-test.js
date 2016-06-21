@@ -56,6 +56,33 @@ describeComponent(
       expect(component._typesToArray()).to.eql([]);
     });
 
+    it('get geolocate is not available', function(){
+      var component = this.subject();
+      var navigator = {
+        geolocation: false
+      };
+      component.set('navigator', navigator);
+      component.set("autocomplete", {
+        setBounds: function () {
+          expect().fail();
+        }
+      });
+      component.geolocate();
+    });
+
+    it('get geolocate is not available', function(){
+      var component = this.subject();
+      var navigator = {
+        geolocation: true
+      };
+      component.set('navigator', navigator);
+      component.set("autocomplete", {
+        setBounds: function () {
+          expect().ok();
+        }
+      });
+      component.geolocate();
+    });
 
   }
 );
